@@ -1,0 +1,38 @@
+﻿@using Q3_p1_Contract.Models;
+@{ 
+    var contracts = ViewBag.contracts;
+    var customers = ViewBag.customers;
+    var id = ViewBag.id;
+}
+
+<h2>List of Contract</h2>
+
+<form action="~/Home/Index" method="post">
+    <select name="CustomerId" onchange="this.form.submit()">
+        <option value="0">Select customer</option>
+        @foreach (Customer cus in customers)
+        {
+        <option value="@cus.CustomerId">@cus.CustomerName</option>
+        }
+    </select>
+</form>
+
+<table style="width:80%; margin:0 auto" border="1">
+    <tr>
+        <th>Code</th>
+        <th>Customer</th>
+        <th>Employee</th>
+        <th>Type</th>
+        <th>SignedDate</th>
+    </tr>
+    @foreach (var c in contracts)
+    {
+        <tr>
+            <td>@c.Code</td>
+            <td>@c.Customer.CustomerName</td>
+            <td>@c.Employee.EmployeeName</td>
+            <td>@c.Type</td>
+            <td>@c.SignedDate</td>
+        </tr>
+    }
+</table>
